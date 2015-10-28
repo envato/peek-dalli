@@ -11,6 +11,8 @@ module Peek
         @misses = Atomic.new(0)
         @writes = Atomic.new(0)
 
+        @label = options.delete(:label)
+
         setup_subscribers
       end
 
@@ -36,6 +38,10 @@ module Peek
           :duration => formatted_duration,
           :calls => @calls.value
         }
+      end
+
+      def label
+        @label || 'dalli'
       end
 
       private
